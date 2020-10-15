@@ -698,9 +698,7 @@ public class TelaFuncionarios extends javax.swing.JFrame {
         obj.setRg(txtrg.getText());
         obj.setCpf(txtcpf.getText());
         obj.setEmail(txtemail.getText());
-        BigInteger cripto;
-        cripto = obj.CriptografarSenha(txtsenha.getText());
-        obj.setSenha(cripto.toString());
+        obj.setSenha(String.copyValueOf(txtsenha.getPassword()));
         obj.setCargo(txtcargo.getText());
         obj.setNivel_acesso(cbnivel.getSelectedItem().toString());
         obj.setTelefone(txtfixo.getText());

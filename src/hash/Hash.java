@@ -18,21 +18,10 @@ import java.util.Random;
 public class Hash {
     
     // número de iterações
-    private static final int ITERACOES = 0;
+    private static final int ITERACOES = 96853;
     
     // codificador base64
     private static final Base64.Encoder encoder = Base64.getEncoder();
-    
-    private static long teste__;
-    public static void teste__() {
-        teste__ = 0;
-        int rodadas = 10;
-        System.out.println("Testando...");
-        for (int i = 0; i < rodadas; i++) {
-            Hash.converter("1234567812345678123456781234567812345678123456781234567812345678");
-        }
-        System.out.println((double)teste__ / rodadas);
-    }
 
     public static String converter(String senha) {
         
@@ -59,25 +48,17 @@ public class Hash {
     
     // retornar o hash da senha, em base64
     private static String hash_string(String senha) {
-        long start = System.nanoTime();
         
         // converter a senha em blocos com padding para 128 bits
         int[] padding = padding(senha);
 
         // calcular o primeiro hash
         int[] hash = hash(padding);
-        
-        int i = 0;
-        for (; System.nanoTime() - start < 500000000; i++) {
-            hash = hash(hash);
-        }
 
         // calcular o hash novamente para cada iteração
-//        for (int i = 0; i < ITERACOES; i++) {
-//            hash = hash(hash);
-//        }
-        
-        teste__ += i;
+        for (int i = 0; i < ITERACOES; i++) {
+            hash = hash(hash);
+        }
         
         // converter o hash em buffer de bytes
         ByteBuffer buffer = ByteBuffer.allocate(hash.length * 4);
